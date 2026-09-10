@@ -1,0 +1,46 @@
+Value,Count,CLC_CODE,LABEL1,LABEL2,LABEL3,R,G,B,RED,GREEN,BLUE
+111,791482,"111",Artificial surfaces,Urban fabric,Continuous urban fabric,"230","0","77",0.90196102858,0.00000000000,0.30196100473
+112,17021251,"112",Artificial surfaces,Urban fabric,Discontinuous urban fabric,"255","0","0",1.00000000000,0.00000000000,0.00000000000
+121,3267370,"121",Artificial surfaces,"Industrial, commercial and transport units",Industrial or commercial units,"204","77","242",0.80000001192,0.30196100473,0.94902002811
+122,442706,"122",Artificial surfaces,"Industrial, commercial and transport units",Road and rail networks and associated land,"204","0","0",0.80000001192,0.00000000000,0.00000000000
+123,123168,"123",Artificial surfaces,"Industrial, commercial and transport units",Port areas,"230","204","204",0.90196102858,0.80000001192,0.80000001192
+124,350012,"124",Artificial surfaces,"Industrial, commercial and transport units",Airports,"230","204","230",0.90196102858,0.80000001192,0.90196102858
+131,894870,"131",Artificial surfaces,"Mine, dump and construction sites",Mineral extraction sites,"166","0","204",0.65097999573,0.00000000000,0.80000001192
+132,128646,"132",Artificial surfaces,"Mine, dump and construction sites",Dump sites,"166","77","0",0.65097999573,0.30196100473,0.00000000000
+133,422446,"133",Artificial surfaces,"Mine, dump and construction sites",Construction sites,"255","77","255",1.00000000000,0.30196100473,1.00000000000
+141,332272,"141",Artificial surfaces,"Artificial, non,agricultural vegetated areas",Green urban areas,"255","166","255",1.00000000000,0.65097999573,1.00000000000
+142,1317570,"142",Artificial surfaces,"Artificial, non,agricultural vegetated areas",Sport and leisure facilities,"255","230","255",1.00000000000,0.90196102858,1.00000000000
+211,121343274,"211",Agricultural areas,Arable land,Non irrigated arable land,"255","255","168",1.00000000000,1.00000000000,0.65882402659
+212,10939190,"212",Agricultural areas,Arable land,Permanently irrigated land,"255","255","0",1.00000000000,1.00000000000,0.00000000000
+213,821477,"213",Agricultural areas,Arable land,Rice fields,"230","230","0",0.90196102858,0.90196102858,0.00000000000
+221,4115058,"221",Agricultural areas,Permanent crops,Vineyards,"230","128","0",0.90196102858,0.50196099281,0.00000000000
+222,4310779,"222",Agricultural areas,Permanent crops,Fruit trees and berry plantations,"242","166","77",0.94902002811,0.65097999573,0.30196100473
+223,5243092,"223",Agricultural areas,Permanent crops,Olive groves,"230","166","0",0.90196102858,0.65097999573,0.00000000000
+231,42953711,"231",Agricultural areas,Pastures,Pastures,"230","230","77",0.90196102858,0.90196102858,0.30196100473
+241,556495,"241",Agricultural areas,Heterogeneous agricultural areas,Annual crops associated with permanent crops,"255","230","166",1.00000000000,0.90196102858,0.65097999573
+242,24256214,"242",Agricultural areas,Heterogeneous agricultural areas,Complex cultivation patterns,"255","230","77",1.00000000000,0.90196102858,0.30196100473
+243,26898237,"243",Agricultural areas,Heterogeneous agricultural areas,"Land principally occupied by agriculture, with significant areas of natural vegetation","230","204","77",0.90196102858,0.80000001192,0.30196100473
+244,3308317,"244",Agricultural areas,Heterogeneous agricultural areas,Agro forestry areas,"242","204","166",0.94902002811,0.80000001192,0.65097999573
+311,58179236,"311",Forest and semi natural areas,Forests,Broadleaved forest,"128","255","0",0.50196099281,1.00000000000,0.00000000000
+312,79561239,"312",Forest and semi natural areas,Forests,Coniferous forest,"0","166","0",0.00000000000,0.65097999573,0.00000000000
+313,30660808,"313",Forest and semi natural areas,Forests,Mixed forest,"77","255","0",0.30196100473,1.00000000000,0.00000000000
+321,21387019,"321",Forest and semi natural areas,Scrub and/or herbaceous vegetation associations,Natural grasslands,"204","242","77",0.80000001192,0.94902002811,0.30196100473
+322,17390628,"322",Forest and semi natural areas,Scrub and/or herbaceous vegetation associations,Moors and heathland,"166","255","128",0.65097999573,1.00000000000,0.50196099281
+323,10786572,"323",Forest and semi natural areas,Scrub and/or herbaceous vegetation associations,Sclerophyllous vegetation,"166","230","77",0.65097999573,0.90196102858,0.30196100473
+324,33092578,"324",Forest and semi natural areas,Scrub and/or herbaceous vegetation associations,Transitional woodland shrub,"166","242","0",0.65097999573,0.94902002811,0.00000000000
+331,769906,"331",Forest and semi natural areas,Open spaces with little or no vegetation,"Beaches, dunes, sands","230","230","230",0.90196102858,0.90196102858,0.90196102858
+332,8936061,"332",Forest and semi natural areas,Open spaces with little or no vegetation,Bare rocks,"204","204","204",0.80000001192,0.80000001192,0.80000001192
+333,23560425,"333",Forest and semi natural areas,Open spaces with little or no vegetation,Sparsely vegetated areas,"204","255","204",0.80000001192,1.00000000000,0.80000001192
+334,307665,"334",Forest and semi natural areas,Open spaces with little or no vegetation,Burnt areas,"0","0","0",0.00000000000,0.00000000000,0.00000000000
+335,1552326,"335",Forest and semi natural areas,Open spaces with little or no vegetation,Glaciers and perpetual snow,"166","230","204",0.65097999573,0.90196102858,0.80000001192
+411,1375489,"411",Wetlands,Inland wetlands,Inland marshes,"166","166","255",0.65097999573,0.65097999573,1.00000000000
+412,11543574,"412",Wetlands,Inland wetlands,Peat bogs,"77","77","255",0.30196100473,0.30196100473,1.00000000000
+421,585853,"421",Wetlands,Maritime wetlands,Salt marshes,"204","204","255",0.80000001192,0.80000001192,1.00000000000
+422,73931,"422",Wetlands,Maritime wetlands,Salines,"230","230","255",0.90196102858,0.90196102858,1.00000000000
+423,1219086,"423",Wetlands,Maritime wetlands,Intertidal flats,"166","166","230",0.65097999573,0.65097999573,0.90196102858
+511,1350733,"511",Water bodies,Inland waters,Water courses,"0","204","242",0.00000000000,0.80000001192,0.94902002811
+512,12971983,"512",Water bodies,Inland waters,Water bodies,"128","242","230",0.50196099281,0.94902002811,0.90196102858
+521,651858,"521",Water bodies,Marine waters,Coastal lagoons,"0","255","166",0.00000000000,1.00000000000,0.65097999573
+522,381846,"522",Water bodies,Marine waters,Estuaries,"166","255","230",0.65097999573,1.00000000000,0.90196102858
+523,147471963,"523",Water bodies,Marine waters,Sea and ocean,"230","242","255",0.90196102858,0.94902002811,1.00000000000
+999,40471,"999",999 (Nodata),999 (Nodata),999 (Nodata),"255","255","255",1.00000000000,1.00000000000,1.00000000000

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SYKE Tool</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
+
+    <style>
+        #map {
+            height: 60vh;
+            width: 100%;
+        }
+        #output {
+            width: 100%;
+            height: 150px;
+            margin-top: 10px;
+            font-family: monospace;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #sendBtn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Textarea to show GeoJSON -->
+<textarea id="output" placeholder="GeoJSON output will appear here..."></textarea>
+
+<!-- Switch between Finland version and Europe version: -->
+<h3>Select region:</h3>
+<label>
+    <input type="radio" name="region" value="finland" checked>Finland version
+</label>
+<label>
+    <input type="radio" name="region" value="europe">Europe version
+</label>
+<br /><br />
+
+<!-- Send Button -->
+<button id="sendBtn">Send</button>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+
+<script>
+    var map = L.map('map').setView([58.515, 20.347], 5);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+
+    var drawControl = new L.Control.Draw({
+        edit: {
+            featureGroup: drawnItems
+        },
+        draw: {
+            polygon: true,
+            polyline: false,
+            rectangle: false,
+            circle: false,
+            marker: false,
+            circlemarker: false
+        }
+    });
+    map.addControl(drawControl);
+
+    let lastGeoJSON = null;
+
+    map.on('draw:created', function (e) {
+        var layer = e.layer;
+        drawnItems.addLayer(layer);
+
+        // Convert to GeoJSON and store/display
+        var geojson = layer.toGeoJSON();
+
+        // Ensure properties object exists
+        if (!geojson.properties) {
+            geojson.properties = {};
+        }
+
+        // Add custom property
+        geojson.properties.areaname = "by-user";
+
+        // Save for sending:
+        lastGeoJSON = geojson;
+
+        // Display in pretty shape:
+        var prettyGeoJSON = JSON.stringify(geojson, null, 2);
+        document.getElementById('output').value = prettyGeoJSON;
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', function () {
+        if (!lastGeoJSON) {
+            alert('No polygon drawn yet!');
+            return;
+        }
+
+        // Which version?
+        const selected = document.querySelector('input[name="region"]:checked');
+        console.log('Selected: '+selected.value);
+        //document.getElementById("result").textContent =
+        //"Selected region: " + selected.value;
+
+        // Default rasters:
+        const default_finland = [
+            "https://vm0160.kaj.pouta.csc.fi/syke/corine/2000/corine_2000_20m.vrt",
+            "https://vm0160.kaj.pouta.csc.fi/syke/corine/2006/corine_2006_20m.vrt",
+            "https://vm0160.kaj.pouta.csc.fi/syke/corine/2012/corine_2012_20m.vrt",
+            "https://vm0160.kaj.pouta.csc.fi/syke/corine/2018/corine_2018_20m.vrt"
+        ]
+        const default_europe = [
+            "https://sykedata.ymparisto.fi/earthobservation-1/project/aquainfra/europe_clc_cog_raster/CLC2000ACC_V2018_20_cog.tif",
+            "https://sykedata.ymparisto.fi/earthobservation-1/project/aquainfra/europe_clc_cog_raster/CLC2006ACC_V2018_20_cog.tif",
+            "https://sykedata.ymparisto.fi/earthobservation-1/project/aquainfra/europe_clc_cog_raster/CLC2012ACC_V2018_20_cog.tif",
+            "https://sykedata.ymparisto.fi/earthobservation-1/project/aquainfra/europe_clc_cog_raster/CLC2018ACC_V2018_20_cog.tif"
+        ]
+
+        // Construct custom JSON payload
+        // With default raster files...
+        let rasters = default_finland;
+        if (selected.value === 'europe') {
+            rasters = default_europe;
+        }
+        const payload = {
+            inputs: {
+                input_geojson: lastGeoJSON,
+                input_urls_rasters: rasters
+            }
+        };
+        
+        // Which process:
+	const base_url = "our-pygeoapi-instance.de/pygeoapi";
+        let url = "https://"+base_url+"/processes/corine-stats-real-areas-"+selected.value+"/execution";
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            //if (response.ok) {
+            //    alert('GeoJSON sent successfully!');
+            //    console.log(response.json());
+            //    console.log(response.text());
+            //    document.getElementById('output').value = response.text();
+            //} else {
+            //    alert('Failed to send GeoJSON.');
+            //}
+
+            // Try to parse as JSON if possible
+            if (response.ok) {
+                return response.json().then(data => {
+                    document.getElementById('output').value = JSON.stringify(data, null, 2);
+                }).catch(() => {
+                    return response.text().then(text => {
+                        document.getElementById('output').value = text;
+                    });
+                });
+            } else {
+                return response.text().then(text => {
+                    document.getElementById('output').value = "Error " + response.status + ":\n" + text;
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while sending.');
+        });
+    });
+</script>
+
+</body>
+</html>
+

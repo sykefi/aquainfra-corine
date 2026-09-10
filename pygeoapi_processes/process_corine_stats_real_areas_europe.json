@@ -1,0 +1,47 @@
+{
+    "version": "0.1.0",
+    "id": "corine-stats-real-areas-europe",
+    "use_case": "SYKE",
+    "title": {
+        "en": "Compute areas of CORINE classes within polygons (Europe version)"
+    },
+    "description": {
+	"en": "This process computes the size of the area in hectares (ha) covered by CORINE Land Cover (CLC) classes within user-defined polygonal regions within Europe. The analysis is based on harmonized European CORINE raster datasets for the years 2000, 2006, 2012, and 2018 with a spatial resolution of 100 meters. The harmonization aligns the class definitions across different CLC versions to ensure temporal consistency and comparability. This enables robust detection and quantification of land use and land cover changes over time. The harmonization includes reclassification of original classes to a common schema, enabling reliable time-series analysis. The output supports various environmental assessments, such as tracking urban expansion, deforestation, or agricultural change. Please contact the Finnish Environment Institute (Syke, Sampsa.Koponen@syke.fi) for detailed documentation and support in applying this service."
+    },
+    "jobControlOptions": ["sync-execute", "async-execute"],
+    "keywords": ["SYKE use case", "AquaINFRA"],
+    "links": [{
+        "type": "text/html",
+        "rel": "about",
+        "title": "GitHub repo",
+        "href": "https://github.com/eebruun/aquainfra_corine",
+        "hreflang": "en-US"
+    }],
+    "inputs": {
+        "input_url_polygons": {
+            "title": "Input Regions",
+            "description": "URL to the file containing the polygons of interest (e.g. as a geojson file, zipped shapefile, or any file that can be read by geopandas.read_file). It has to contain the attribute areaname and a geometry.",
+            "schema": {
+                "type": "string"
+            },
+            "minOccurs": 1,
+            "maxOccurs": 1,
+            "keywords": ["polygons"]
+	}
+    },
+    "outputs": {
+        "csv_files_per_area": {
+            "title": "Values per Area",
+            "description": "A JSON object containing links to the output result csv file of each polygon.",
+            "schema": {
+                "type": "object",
+                "contentMediaType": "application/json"
+            }
+        }
+    },
+    "example": {
+        "inputs": {
+            "input_url_polygons": "https://aquainfra.ogc.igb-berlin.de/exampledata/syke/corine/sykeshape.zip"
+        }
+    }
+}

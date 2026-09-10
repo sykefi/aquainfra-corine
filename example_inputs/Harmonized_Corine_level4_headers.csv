@@ -1,0 +1,48 @@
+﻿Value;Level4;Level4Fin;Level4Eng
+1;1111;Kerrostaloalueet;Continuous urban fabric
+2;1121;Pientaloalueet;Discontinuous urban fabric
+3;1210;Teollisuuden tai palveluiden alueet;Industrial or commercial units
+5;1221;Liikennealueet;Road and rail networks and associated land
+6;1231;Satama-alueet;Port areas
+7;1241;Lentokenttäalueet;Airports
+8;1310;Maa-ainesten ottoalueet;Mineral extraction sites
+10;1321;Kaatopaikat;Dump sites
+11;1331;Rakennustyöalueet;Construction sites
+12;1411;Puistot;Green urban areas
+13;1421;Vapaa-ajan asunnot;Summer cottages
+14;1422;Muut urheilu- ja vapaa-ajan toiminta –alueet;Sport and leisure areas
+15;1423;Golfkentät;Golf courses
+16;1424;Raviradat;Racecourses
+17;2111;Pellot;Non-irrigated arable land
+18;2221;Hedelmäpuu- ja marjapensasviljelmät;Fruit trees and berry plantations
+19;2310;Laidunmaat  ;Pastures
+21;2431;Maataloustukijärjestelmän ulkopuoliset maatalousmaat;Arable land outside farming subsidies
+22;2441;Puustoiset pelto- ja laidunmaat;Agro-forestry areas
+23;3111;Lehtimetsät kivennäismaalla;Broad-leaved forest on mineral soil
+24;3112;Lehtimetsät turvemaalla;Broad-leaved forest on peatland
+25;3121;Havumetsät kivennäismaalla;Coniferous forest on mineral soil
+26;3122;Havumetsät turvemaalla;Coniferous forest on peatland
+27;3123;Havumetsät kalliomaalla;Coniferous forest on rocky soil
+28;3131;Sekametsät kivennäismaalla;Mixed forest on mineral soil
+29;3132;Sekametsät turvemaalla;Mixed forest on peatland
+30;3133;Sekametsät kalliomaalla;Mixed forest on rocky soil
+31;3211;Luonnonniityt;Natural grassland
+32;3221;Varvikot ja nummet;Moors and heathland 
+33;3241;Harvapuustoiset alueet , cc <10%  ;Transitional woodland/shrub  cc <10%  
+34;3242;Harvapuustoiset alueet, cc 10-30%, kivennäismaalla   ;Transitional woodland/shrub, cc 10-30%,on mineral soil
+35;3243;Harvapuustoiset alueet, cc 10-30%, turvemaalla   ;Transitional woodland/shrub, cc 10-30%,  on peatland
+36;3244;Harvapuustoiset alueet, cc 10-30%, kalliomaalla;Transitional woodland/shrub, cc 10-30%,  on rocky soil
+37;3246;Harvapuustoiset alueet, sähkölinjan alla;Transitional woodland/shrub under power lines
+38;3311;Rantahietikot ja dyynialueet;Beaches, dunes, and sand plains 
+39;3321;Kalliomaat  ;Bare rock
+40;3331;Niukkakasvustoiset kangasmaat ;Sparsely vegetated areas
+41;4111;Sisämaan kosteikot maalla;Inland marshes, terrestrial
+42;4112;Sisämaan kosteikot vedessä;Inland marshes, aquatic
+43;4121;Avosuot;Peatbogs
+44;4122;Turvetuotantoalueet;Peat production sites
+45;4211;Merenrantakosteikot maalla;Salt marshes, terrestrial
+46;4212;Merenrantakosteikot vedessä;Salt marshes, aquatic
+47;5111;Joet;Water courses
+48;5121;Järvet;Water bodies
+49;5231;Meri;Sea and ocean
+98;9999;NoData;NoData

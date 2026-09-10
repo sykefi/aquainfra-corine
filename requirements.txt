@@ -1,0 +1,8 @@
+# For the base tool
+rasterstats
+geopandas
+
+# For the deployment as pygeoapi process
+pandas
+requests
+

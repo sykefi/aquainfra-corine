@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SYKE Tool</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
+
+    <style>
+        #map {
+            height: 70vh;
+            width: 100%;
+        }
+        #output {
+            width: 100%;
+            height: 150px;
+            margin-top: 10px;
+            font-family: monospace;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #sendBtn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Textarea to show GeoJSON -->
+<textarea id="output" placeholder="GeoJSON output will appear here..."></textarea>
+
+<!-- Send Button -->
+<button id="sendBtn">Send</button>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+
+<script>
+    var map = L.map('map').setView([58.515, 20.347], 5);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+
+    var drawControl = new L.Control.Draw({
+        edit: {
+            featureGroup: drawnItems
+        },
+        draw: {
+            polygon: true,
+            polyline: false,
+            rectangle: false,
+            circle: false,
+            marker: false,
+            circlemarker: false
+        }
+    });
+    map.addControl(drawControl);
+
+    let lastGeoJSON = null;
+
+    map.on('draw:created', function (e) {
+        var layer = e.layer;
+        drawnItems.addLayer(layer);
+
+        // Convert to GeoJSON and store/display
+        var geojson = layer.toGeoJSON();
+        lastGeoJSON = geojson; // Save for sending
+        var prettyGeoJSON = JSON.stringify(geojson, null, 2);
+        document.getElementById('output').value = prettyGeoJSON;
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', function () {
+        if (!lastGeoJSON) {
+            alert('No polygon drawn yet!');
+            return;
+        }
+
+        // Construct custom JSON payload
+        const payload = {
+            inputs: {
+                input_geojson: lastGeoJSON
+            }
+        };
+        fetch('https://example.com/pygeoapi/processes/syke-corine-stats-real-areas/execution', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            //if (response.ok) {
+            //    alert('GeoJSON sent successfully!');
+            //    console.log(response.json());
+            //    console.log(response.text());
+            //    document.getElementById('output').value = response.text();
+            //} else {
+            //    alert('Failed to send GeoJSON.');
+            //}
+
+            // Try to parse as JSON if possible
+            if (response.ok) {
+                return response.json().then(data => {
+                    document.getElementById('output').value = JSON.stringify(data, null, 2);
+                }).catch(() => {
+                    return response.text().then(text => {
+                        document.getElementById('output').value = text;
+                    });
+                });
+            } else {
+                return response.text().then(text => {
+                    document.getElementById('output').value = "Error " + response.status + ":\n" + text;
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while sending.');
+        });
+    });
+</script>
+
+</body>
+</html>
