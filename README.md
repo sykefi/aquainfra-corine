@@ -2,7 +2,7 @@
 
 ## What is it about?
 
-This process computes the size of the area in hectares (ha) covered by CORINE Land Cover (CLC) classes within user-defined polygonal regions. The analysis is based on harmonized Finnish CORINE raster datasets for the years 2000, 2006, 2012, and 2018. The harmonization aligns the class definitions across different CLC versions to ensure temporal consistency and comparability. This enables robust detection and quantification of land use and land cover changes over time. The Finnish CLC datasets are an enhanced national version with higher resolution and accuracy than the pan-European CLC data. The harmonization includes reclassification of original classes to a common schema, enabling reliable time-series analysis. The output supports various environmental assessments, such as tracking urban expansion, deforestation, or agricultural change. Please contact the Finnish Environment Institute (Syke, Sampsa.Koponen@syke.fi) for detailed documentation and support in applying this service.
+This process computes the size of the area in hectares (ha) covered by CORINE Land Cover (CLC) classes within user-defined polygonal regions. The analysis is based on harmonized Finnish or Europe CORINE raster datasets for the years 2000, 2006, 2012, and 2018. The harmonization aligns the class definitions across different CLC versions to ensure temporal consistency and comparability. This enables robust detection and quantification of land use and land cover changes over time. The Finnish CLC datasets are an enhanced national version with higher resolution and accuracy than the pan-European CLC data. The harmonization includes reclassification of original classes to a common schema, enabling reliable time-series analysis. The output supports various environmental assessments, such as tracking urban expansion, deforestation, or agricultural change. Please contact the Finnish Environment Institute (Syke, Sampsa.Koponen@syke.fi) for detailed documentation and support in applying this service.
 
 ## How to use this
 
@@ -147,7 +147,7 @@ For this, look at the README in the directory `pygeoapi_processes`.
 
 Finnish Environment Institute (Syke, Sampsa.Koponen@syke.fi)
 
-Developed in AquaINFRA project
+Developed in AquaINFRA project. This project has received funding from the European Commission’s Horizon Europe Research and Innovation programme under grant agreement No 101094434.
 
 ## TODO
 
