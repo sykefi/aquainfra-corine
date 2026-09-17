@@ -159,6 +159,7 @@ Software version: v1.0.0
 DOI: 10.5281/zenodo.22792055
 License: Creative Commons Attribution 4.0 International
 
+Cite this repository with CITATION.cff
 
 Contact:
 Finnish Environment Institute (Syke, Sampsa.Koponen@syke.fi)
