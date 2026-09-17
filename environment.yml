@@ -1,0 +1,12 @@
+name: corine_tool
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - python=3.11
+  - geopandas
+  - rasterio
+  - rasterstats
+  - pandas
+  - requests

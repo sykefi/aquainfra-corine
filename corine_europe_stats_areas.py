@@ -4,19 +4,12 @@ Created on Tue Apr 16 12:06:34 2024
 
 Modified by Merret Buurman, IGB, February 2025
 
-Modified by Eero Alkio, Syke, 12th February 2026 for European scale
+Modified by Eero Alkio, Syke, 12th February 2026 for European scale and finalized 9/2026 
 
 """
 
-#-*- coding: utf-8 -*-
-#conda create --name statcomp python=3.11
-#conda activate statcomp
-#conda install -c conda-forge rasterstats=0.19.0  
-#conda install -c conda-forge geopandas=0.9.0
-
-
 from rasterstats import zonal_stats
-import os, glob
+import os, glob, re
 import geopandas as gpd
 import pandas as pd
 import logging
@@ -27,7 +20,7 @@ LOGGER = logging.getLogger(__name__)
 
 def corine_stats_real_areas(input_polygons_path, input_path_rasters, input_path_headers, output_path, string_for_output_name, contact_email=None):
     
-    ## Input rasters as list of urls
+    ## Input rasters as list of hardcoded urls
     rasters = sorted(input_path_rasters)
 
     # Warn if no rasters 
@@ -47,7 +40,7 @@ def corine_stats_real_areas(input_polygons_path, input_path_rasters, input_path_
         print(f"Missing crs for polygon {input_polygons_path}")
         raise ValueError("Missing CRS - the input polygon file must have a defined CRS")
     
-    ## Getting the raster crs
+    ## Getting the raster crs from the first input raster (These should all have the same CRS)
     with rasterio.open(rasters[0]) as src:
         raster_crs = src.crs  
 
@@ -69,11 +62,12 @@ def corine_stats_real_areas(input_polygons_path, input_path_rasters, input_path_
     LOGGER.debug('Iterating over the areas...')
     for idx, area in areas.iterrows():
         i += 1
-        ## Added areaname check EA
-        if "areaname" not in areas.columns:
-            
-            LOGGER.error('Area %s has no areaname attribute!' % input_polygons_path)
-            raise ValueError('Area in file %s has no areaname attribute!' % input_polygons_path)
+        ## Fall back to an auto-generated name if areaname is missing or empty EA
+        has_areaname = "areaname" in areas.columns and pd.notna(area.get("areaname")) and str(area.get("areaname")).strip() != ""
+        if not has_areaname:
+            area["areaname"] = "area_%s" % i
+            LOGGER.warning('Area %s in file %s has no areaname attribute - using fallback name "%s" instead.' % (i, input_polygons_path, area["areaname"]))
+
         LOGGER.debug('Area %s: %s' % (i, area.areaname))
         #LOGGER.debug(area) # show the attributes from the shapefile!
         area = area[['areaname', 'geometry']]
@@ -121,9 +115,11 @@ def corine_stats_real_areas(input_polygons_path, input_path_rasters, input_path_
         LOGGER.debug('Done iterating over rasters for this area... (%s)' % area.areaname)
         #LOGGER.debug(arearesults) # This is long!
 
-        # Make ASCII filename:
-        areaname_ascii = (c for c in area.areaname if 0 < ord(c) < 127)
-        areaname_ascii = ''.join(areaname_ascii)
+        # Make ASCII, filename-safe name: drop non-ASCII chars, replace the rest of unsafe chars with underscores
+        areaname_ascii = ''.join(c for c in area.areaname if 0 < ord(c) < 127)
+        areaname_ascii = re.sub(r'[^A-Za-z0-9._-]+', '_', areaname_ascii).strip('_')
+        if not areaname_ascii:
+            areaname_ascii = 'area_%s' % i
         LOGGER.debug('Area name in ASCII: BEFORE: %s, AFTER: %s' % (area.areaname, areaname_ascii))
 
         filename = 'europe_corine_stats_real_areas_%s_%s.csv' % (areaname_ascii, string_for_output_name)
@@ -150,12 +146,12 @@ def corine_stats_real_areas(input_polygons_path, input_path_rasters, input_path_
 To run this code locally, define the paths for inputs and outputs here.
 
 The outputs will be one csv file per area, named as follows:
-corine_stats_real_areas_<areaname>_<string_for_output_name>.csv
+europe_corine_stats_real_areas_<areaname>_<string_for_output_name>.csv
 
 For example:
-corine_stats_real_areas_Kerava_test123.csv
-corine_stats_real_areas_Vantaa_test123.csv
-corine_stats_real_areas_Pitkkoski_test123.csv
+europe_corine_stats_real_areas_Finland.csv
+europe_corine_stats_real_areas_Sweden.csv
+europe_corine_stats_real_areas_Norway.csv
 
 '''
 
@@ -166,15 +162,24 @@ if __name__ == "__main__":
     # Alternatively, to file:
     #logging.basicConfig(level=logging.DEBUG, filename='corine_stats_real_areas.log', format='%(asctime)s - %(name)s - %(levelname)5s - %(message)s')
 
-    # Where are the inputs stored?
-    input_path_headers = "./example_inputs/" # .csv headers have to be in here
-    input_polygons_path = "./example_inputs/aquainfra_catchment_areas.shp"
+    ## DON'T CHANGE THE INPUT HEADERS - THEY ARE FIXED FOR HARMONIZED CORINE-DATASETS
+    input_path_headers = "./example_inputs/"
 
-    ## These should be added to the process-file and adjust when the final decision for data-sharing is made
-    input_path_rasters = ['https://sykedata.ymparisto.fi/earthobservation-1/project/aquainfra/europe_clc_cog_raster/CLC2000ACC_V2018_20_cog.tif','https://sykedata.ymparisto.fi/earthobservation-1/project/aquainfra/europe_clc_cog_raster/CLC2006ACC_V2018_20_cog.tif', 'https://sykedata.ymparisto.fi/earthobservation-1/project/aquainfra/europe_clc_cog_raster/CLC2012ACC_V2018_20_cog.tif', 'https://sykedata.ymparisto.fi/earthobservation-1/project/aquainfra/europe_clc_cog_raster/CLC2018ACC_V2018_20_cog.tif']
+    ## INSERT THE INPUT POLYGON WITH "areaname"-ATTRIBUTE HERE
+    input_polygons_path = "./example_inputs/corine_tool_input.gpkg"
 
-    # Where will the outputs be stored?
-    output_path = "./outputs"
+    ## Hardcoded harmonized input CORINE rasters for Europe, 100m reoslution
+    input_path_rasters = [
+        "https://aquainfra-syke.a3s.fi/europe_clc_cog_raster/CLC2000ACC_V2018_20_cog.tif",
+        "https://aquainfra-syke.a3s.fi/europe_clc_cog_raster/CLC2006ACC_V2018_20_cog.tif",
+        "https://aquainfra-syke.a3s.fi/europe_clc_cog_raster/CLC2012ACC_V2018_20_cog.tif",
+        "https://aquainfra-syke.a3s.fi/europe_clc_cog_raster/CLC2018ACC_V2018_20_cog.tif"
+    ]
+    ## Modify the output path if needed
+    output_path = "./example_outputs"
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+
     string_for_output_name = datetime.datetime.today().strftime('%Y-%m-%d')  # will be included in the output name
 
     LOGGER.debug('RUNNING analysis function...')

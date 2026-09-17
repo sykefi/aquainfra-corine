@@ -1,0 +1,5 @@
+Year;areaname;Raster;Artificial surfaces;Agricultural areas;Forests and semi-natural areas;Wetlands;Water bodies 
+2000;itäsuomi;CLC2000_finland_harmonized_20m_cog;125300;234876;3130000;73225;1011681
+2006;itäsuomi;CLC2006_finland_harmonized_20m_cog;127960;235495;3129150;70637;1011839
+2012;itäsuomi;CLC2012_finland_harmonized_20m_cog;130939;229154;3130874;72239;1011877
+2018;itäsuomi;CLC2018_finland_harmonized_20m_cog;132550;230034;3128157;72472;1011870

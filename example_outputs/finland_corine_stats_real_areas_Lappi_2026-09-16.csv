@@ -1,0 +1,5 @@
+Year;areaname;Raster;Artificial surfaces;Agricultural areas;Forests and semi-natural areas;Wetlands;Water bodies ;9
+2000;Lappi;CLC2000_finland_harmonized_20m_cog;12256;9076;1560625;309691;84887;3
+2006;Lappi;CLC2006_finland_harmonized_20m_cog;12507;9566;1560257;309277;84931;0
+2012;Lappi;CLC2012_finland_harmonized_20m_cog;13219;9310;1560031;309041;84939;
+2018;Lappi;CLC2018_finland_harmonized_20m_cog;13424;9268;1559875;309031;84940;
