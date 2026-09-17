@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the software and its authors."
+title: "CORINE tool for land-use change and trend analysis workflow"
+
+authors:
+  - family-names: "Alkio"
+    given-names: "Eero"
+    affiliation: "Finnish Environment Institute (Syke)"
+    orcid: https://orcid.org/0009-0003-6639-0486
+  - family-names: "Bruun"
+    given-names: "Eeva"
+    affiliation: "Finnish Environment Institute (Syke)"
+    orcid: https://orcid.org/0009-0001-3847-9788
+  - family-names: "Buurman"
+    given-names: "Merret"
+    affiliation: "Leibniz Institute of Freshwater Ecology and Inland Fisheries (IGB): Berlin, DE: Berlin, Berlin, DE"
+    orcid: https://orcid.org/0000-0001-6945-456X
+  - family-names: "Koponen"
+    given-names: "Sampsa"
+    affiliation: "Finnish Environment Institute (Syke)"
+    orcid: https://orcid.org/0000-0002-2959-5699
+
+version: "1.0.0"
+doi: "10.5281/zenodo.22792055"
+repository-code: https://github.com/sykefi/aquainfra-corine

@@ -147,11 +147,23 @@ using the platform [pygeoapi](https://pygeoapi.io/).
 For this, look at the README in the directory `pygeoapi_processes`.
 
 
-## Contact
+## METADATA
 
+Developed by: Finnish Environment Institute (Syke), Finland
+Original authors: Alkio Eero, Bruun Eeva, Buurman Merret
+Project: AquaINFRA – Infrastructure for Marine and Inland Water Research
+Grant agreement: 101094434
+
+Source repository: https://github.com/sykefi/aquainfra-corine
+Software version: v1.0.0
+DOI: 10.5281/zenodo.22792055
+License: Creative Commons Attribution 4.0 International
+
+
+Contact:
 Finnish Environment Institute (Syke, Sampsa.Koponen@syke.fi)
 
-Developed in AquaINFRA project. This project has received funding from the European Commission’s Horizon Europe Research and Innovation programme under grant agreement No 101094434.
+Developed in AquaINFRA project. This project has received funding from the European Commission's Horizon Europe Research and Innovation programme under grant agreement No 101094434.
 
 ## TODO
 
