@@ -1,5 +1,4 @@
-# aquainfra-corine
-# SYKE Corine process
+## SYKE Corine tool (Aquainfra)
 
 ## What is it about?
 
@@ -146,7 +145,9 @@ For this, look at the README in the directory `pygeoapi_processes`.
 
 ## Contact
 
-AquaINFRA project, WP 4 and 5
+Finnish Environment Institute (Syke, Sampsa.Koponen@syke.fi)
+
+Developed in AquaINFRA project
 
 ## TODO
 
